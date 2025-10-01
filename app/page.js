@@ -1,11 +1,16 @@
+// https://github.com/falconvn2006/cprg306-assignments.git
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="">
+    <main className="">
       <h1>CPRG 306: Web Development 2 - Assignments</h1>
-      <Link href='/week-2'>Week 2 Assignment</Link> <br/>
+      <Link href='/week-2'>Week 2 Assignment</Link>
+      <br />
       <Link href='/week-3'>Week 3 Assignment</Link>
-    </div>
+      <br />
+      <Link href='/week-4'>Week 4 Assignment</Link>
+      <br />
+    </main>
   );
 }
