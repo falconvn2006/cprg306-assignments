@@ -31,7 +31,8 @@ export default function MealIdeas({ ingredient }) {
     }
 
     useEffect(() => {
-        loadMealIdeas();
+        if(ingredient.length > 0)
+            loadMealIdeas();
     }, [ingredient]);
 
     return (
