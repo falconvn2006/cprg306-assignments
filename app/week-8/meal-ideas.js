@@ -36,7 +36,7 @@ export default function MealIdeas({ ingredient }) {
 
     return (
         <div>
-            <header className="text-3xl font-bold my-4">Meal Ideas for "{ingredient}"</header>
+            <header className="text-3xl font-bold my-4">Meal Ideas for &quot;{ingredient}&quot;</header>
             <ul>
                 {meals.map((meal) => (
                     <li key={meal.idMeal} className="p-2 m-2 bg-slate-900 max-w-sm">
