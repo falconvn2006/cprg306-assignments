@@ -28,17 +28,18 @@ export default function ItemsList({ itemsData, onItemSelect }) {
     });
 
     return (
-    <main className="flex flex-col items-center">
+    <main>
+        <div className="flex items-center gap-2">
+            <p className="text-sm text-gray-600">Sort by: </p>
+            <button onClick={() => setSortBy("name")} className={`px-3 py-1 rounded border text-sm transition-colors cursor-pointer ${sortBy === "name" ? "bg-blue-600 text-white border-blue-600" : "bg-gray-100 text-gray-800 hover:bg-gray-400"}`}>Name</button>
+            <button onClick={() => setSortBy("category")} className={`px-3 py-1 rounded border text-sm transition-colors cursor-pointer ${sortBy === "category" ? "bg-blue-600 text-white border-blue-600" : "bg-gray-100 text-gray-800 hover:bg-gray-400"}`}>Category</button>
+        </div>
+    
         <ul>
             {handleSort.map((item, i) => (
                 <li key={i}> <Item item={item} onSelect={onItemSelect} /> </li>
             ))}
         </ul>
-
-        <div>
-            <button onClick={() => setSortBy("name")} className= "bg-yellow-500 m-4 p-2 font-bold text-xl rounded cursor-pointer" >Sort By Name</button>
-            <button onClick={() => setSortBy("category")} className= "bg-yellow-500 m-4 p-2 font-bold text-xl rounded cursor-pointer" >Sort By Category</button>
-        </div>
     </main>
     );
 }

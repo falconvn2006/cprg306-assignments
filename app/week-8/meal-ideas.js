@@ -19,13 +19,11 @@ export default function MealIdeas({ ingredient }) {
     const [meals, setMeals] = useState([]);
 
     const loadMealIdeas = async () => {
-        try{
+        try {
             const mealsResult = await fetchMealIdeas(ingredient);
             setMeals(mealsResult);
-            console.log(mealsResult);
         }
-        catch(error)
-        {
+        catch(error) {
             console.log(error);
         }
     }
@@ -37,14 +35,23 @@ export default function MealIdeas({ ingredient }) {
 
     return (
         <div>
-            <header className="text-3xl font-bold my-4">Meal Ideas for &quot;{ingredient}&quot;</header>
-            <ul>
+        <header className="text-lg font-semibold mb-2">
+            {ingredient ? `Meal Ideas for "${ingredient}"` : "Select an ingredient"}
+        </header>
+
+        {
+            !ingredient ? (<p className="text-gray-500">Choose an item to see ideas.</p>) 
+            : meals.length === 0 ? (<p className="text-gray-500">No meals found.</p>) 
+            : (
+                <ul className="grid grid-cols-1 sm:grid-cols-2">
                 {meals.map((meal) => (
-                    <li key={meal.idMeal} className="p-2 m-2 bg-slate-900 max-w-sm">
-                        {meal.strMeal}
+                    <li key={meal.idMeal} className="p-2 m-2 bg-slate-900 max-w-sm border rounded">
+                    {meal.strMeal}
                     </li>
                 ))}
-            </ul>
+                </ul>
+            )
+        }
         </div>
-    )
+    );
 }

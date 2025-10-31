@@ -20,22 +20,33 @@ export default function Page() {
     const handleItemSelect = (itemSelected) => {
         console.log(itemSelected)
         const cleanItemSelected = itemSelected.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '').trim();
+        
+        let x = "";
+        for (let i = 0; i < cleanItemSelected.length; i++) {
+            if (cleanItemSelected[i] == ',') break;
+            x += cleanItemSelected[i];
+        }
 
-        setSelectedItemName(cleanItemSelected);
-        console.log(cleanItemSelected);
+        setSelectedItemName(x);
+        console.log(x);
     }
 
-    return (
-        <main>
-            <h1 className="text-5xl font-bold">Shopping List</h1>
+return (
+  <main className="flex flex-col items-center gap-2 content-center">
+    <h1 className="text-5xl font-bold">Shopping List + Meal Ideas</h1>
 
-            <NewItem onAddItem={handleAddItem} />
-            <ItemsList itemsData={items} onItemSelect={handleItemSelect} />
-            <MealIdeas ingredient={selectedItemName} />
-        </main>
+    <div className="flex flex-col md:flex-row gap-5 m-2 items-start">
+      <div>
+        <NewItem onAddItem={handleAddItem} />
+        <ItemsList itemsData={items} onItemSelect={handleItemSelect} />
+      </div>
 
-
-    );
+      <div className="md:self-start">
+        <MealIdeas ingredient={selectedItemName} />
+      </div>
+    </div>
+  </main>
+);
 
 
 }
