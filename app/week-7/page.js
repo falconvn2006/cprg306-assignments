@@ -10,11 +10,15 @@ export default function Page() {
 
     const [items, setItems] = useState(itemsData);
 
+    const handleAddItem = (newItem) => {
+        setItems([...items, newItem]);
+    }
+
     return (
         <main>
             <h1 className="text-5xl font-bold">Shopping List</h1>
 
-            <NewItem onAddItem={setItems} />
+            <NewItem onAddItem={handleAddItem} />
             <ItemsList itemsData={items} />
         </main>
 

@@ -19,16 +19,18 @@ export default function Page() {
 
     const handleItemSelect = (itemSelected) => {
         console.log(itemSelected)
-        const cleanItemSelected = itemSelected.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '').trim();
+        // Remove emojis from the selected item string
+        const emojiRemovedItemSelected = itemSelected.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '').trim();
         
-        let x = "";
-        for (let i = 0; i < cleanItemSelected.length; i++) {
-            if (cleanItemSelected[i] == ',') break;
-            x += cleanItemSelected[i];
+        // Extract the item name before any comma
+        let cleanItemSelected = "";
+        for (let i = 0; i < emojiRemovedItemSelected.length; i++) {
+            if (emojiRemovedItemSelected[i] == ',') break;
+            cleanItemSelected += emojiRemovedItemSelected[i];
         }
 
-        setSelectedItemName(x);
-        console.log(x);
+        setSelectedItemName(cleanItemSelected);
+        console.log(cleanItemSelected);
     }
 
 return (

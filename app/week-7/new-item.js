@@ -27,7 +27,7 @@ export default function NewItem( {onAddItem} ) {
             category: category
         };
 
-        onAddItem((prevItems) => [...prevItems, newItem]);
+        onAddItem(newItem);
 
         setName("");
         setQuantity(1);
