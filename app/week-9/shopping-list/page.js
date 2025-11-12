@@ -1,5 +1,7 @@
 'use client';
 
+import { useUserAuth } from "../_utils/auth-context";
+
 import NewItem from "./new-item";
 import ItemsList from "./items-list";
 import MealIdeas from "./meal-ideas";
@@ -9,7 +11,7 @@ import itemsData from "./items.json";
 import { useState } from "react";
 
 export default function Page() {
-
+    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
     const [items, setItems] = useState(itemsData);
     const [selectedItemName, setSelectedItemName] = useState('');
 
@@ -25,8 +27,8 @@ export default function Page() {
         // Extract the item name before any comma
         let cleanItemSelected = "";
         for (let i = 0; i < emojiRemovedItemSelected.length; i++) {
-            if (emojiRemovedItemSelected[i] == ',') break;
-            cleanItemSelected += emojiRemovedItemSelected[i];
+          if (emojiRemovedItemSelected[i] == ',') break;
+          cleanItemSelected += emojiRemovedItemSelected[i];
         }
 
         setSelectedItemName(cleanItemSelected);
@@ -34,19 +36,27 @@ export default function Page() {
     }
 
 return (
+
+
   <main className="flex flex-col items-center gap-2 content-center">
-    <h1 className="text-5xl font-bold">Shopping List + Meal Ideas</h1>
+    { !user ? (
+      <p>Please log in to view your shopping list.</p>
+    ) : (
+      <>
+        <h1 className="text-5xl font-bold">Shopping List + Meal Ideas</h1>
 
-    <div className="flex flex-col md:flex-row gap-5 m-2 items-start">
-      <div>
-        <NewItem onAddItem={handleAddItem} />
-        <ItemsList itemsData={items} onItemSelect={handleItemSelect} />
-      </div>
+        <div className="flex flex-col md:flex-row gap-5 m-2 items-start">
+          <div>
+            <NewItem onAddItem={handleAddItem} />
+            <ItemsList itemsData={items} onItemSelect={handleItemSelect} />
+          </div>
 
-      <div className="md:self-start">
-        <MealIdeas ingredient={selectedItemName} />
-      </div>
-    </div>
+          <div className="md:self-start">
+            <MealIdeas ingredient={selectedItemName} />
+          </div>
+        </div>
+      </>
+    )}
   </main>
 );
 
