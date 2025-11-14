@@ -33,22 +33,22 @@ export default function Page() {
         console.log(cleanItemSelected);
     }
 
-return (
-  <main className="flex flex-col items-center gap-2 content-center">
-    <h1 className="text-5xl font-bold">Shopping List + Meal Ideas</h1>
+  return (
+    <main className="flex flex-col items-center gap-2 content-center">
+      <h1 className="text-5xl font-bold">Shopping List + Meal Ideas</h1>
 
-    <div className="flex flex-col md:flex-row gap-5 m-2 items-start">
-      <div>
-        <NewItem onAddItem={handleAddItem} />
-        <ItemsList itemsData={items} onItemSelect={handleItemSelect} />
-      </div>
+      <div className="flex flex-col md:flex-row gap-5 m-2 items-start">
+        <div>
+          <NewItem onAddItem={handleAddItem} />
+          <ItemsList itemsData={items} onItemSelect={handleItemSelect} />
+        </div>
 
-      <div className="md:self-start">
-        <MealIdeas ingredient={selectedItemName} />
+        <div className="md:self-start">
+          <MealIdeas ingredient={selectedItemName} />
+        </div>
       </div>
-    </div>
-  </main>
-);
+    </main>
+  );
 
 
 }
