@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 // Part 5: landing page starts
 // Import the useUserAuth hook
 import { useUserAuth } from "./_utils/auth-context";
@@ -20,6 +21,7 @@ export default function Page() {
           <>
             <button onClick={async () => { await firebaseSignOut(); }}>Sign Out</button>
             <p>Welcome, {user?.displayName || user?.email || "User"}</p>
+            <Link href="/week-9/shopping-list">Go to Shopping List</Link>
           </>
         )}
     </main>
