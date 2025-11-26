@@ -4,6 +4,7 @@
 // Import the useUserAuth hook
 import { useUserAuth } from "./_utils/auth-context";
 
+import Link from "next/link";
 
 export default function Page() {
   // Use the useUserAuth hook to get the user object and the login and logout functions
@@ -20,6 +21,7 @@ export default function Page() {
           <>
             <button onClick={async () => { await firebaseSignOut(); }}>Sign Out</button>
             <p>Welcome, {user?.displayName || user?.email || "User"}</p>
+            <Link className="hover:underline" href="/week-10/shopping-list">Go to shopping list</Link>
           </>
         )}
     </main>
