@@ -6,17 +6,20 @@ import NewItem from "./new-item";
 import ItemsList from "./items-list";
 import MealIdeas from "./meal-ideas";
 
-import itemsData from "./items.json";
+import { useState, useEffect } from "react";
 
-import { useState } from "react";
+import { getItems, addItem } from "../_services/shopping-list-service";
+
+
 
 export default function Page() {
     const { user } = useUserAuth();
-    const [items, setItems] = useState(itemsData);
+    const [items, setItems] = useState([]);
     const [selectedItemName, setSelectedItemName] = useState('');
 
     const handleAddItem = (newItem) => {
-        setItems([...items, newItem]);
+      addItem(user.uid, newItem);
+      setItems([...items, newItem]);
     }
 
     const handleItemSelect = (itemSelected) => {
@@ -34,6 +37,15 @@ export default function Page() {
         setSelectedItemName(cleanItemSelected);
         console.log(cleanItemSelected);
     }
+
+    useEffect(() => {
+      async function loadItems()
+      {
+        const itemResult = await getItems(user.uid);
+        setItems(itemResult);
+      }
+      loadItems();
+    }, [user])
 
 return (
 
